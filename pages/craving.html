@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Craving Decoder · PsychoNutri</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#100800;color:#fff5e0;font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+.back{position:fixed;top:1.2rem;left:1.5rem;z-index:100;color:rgba(251,146,60,0.4);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.3s;font-family:'Syne',sans-serif}.back:hover{color:#fb923c}
+.scr{position:relative;z-index:1;max-width:680px;margin:0 auto;padding:5rem 2rem 4rem}
+.header{text-align:center;margin-bottom:3rem}
+.badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(251,146,60,0.08);border:1px solid rgba(251,146,60,0.2);color:#fb923c;padding:0.4rem 1rem;border-radius:50px;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem}
+.badge span{width:6px;height:6px;background:#fb923c;border-radius:50%;animation:blink 1.5s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+.title{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:700;margin-bottom:0.8rem;background:linear-gradient(135deg,#fb923c,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:rgba(255,245,224,0.55);font-size:1rem;line-height:1.75;max-width:480px;margin:0 auto}
+.card{background:rgba(251,146,60,0.04);border:1px solid rgba(251,146,60,0.15);border-radius:16px;padding:2rem;margin-bottom:1.5rem}
+.label{font-size:0.75rem;letter-spacing:0.12em;text-transform:uppercase;color:#fb923c;margin-bottom:1rem;font-family:'Syne',sans-serif;font-weight:600;display:block}
+.craving-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.7rem;margin-bottom:1rem}
+.cv-btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:rgba(255,245,224,0.6);padding:0.9rem 0.5rem;border-radius:10px;cursor:pointer;font-size:0.82rem;text-align:center;transition:all 0.25s;font-family:'Inter',sans-serif}
+.cv-btn:hover{background:rgba(251,146,60,0.1);border-color:rgba(251,146,60,0.3);color:#fff5e0}
+.cv-btn.active{background:rgba(251,146,60,0.15);border-color:#fb923c;color:#fb923c}
+.cv-icon{font-size:1.5rem;display:block;margin-bottom:0.3rem}
+.txt-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#fff5e0;padding:0.9rem 1.1rem;border-radius:10px;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.3s}
+.txt-input:focus{border-color:rgba(251,146,60,0.4)}
+.txt-input::placeholder{color:rgba(255,245,224,0.25)}
+.go-btn{width:100%;background:linear-gradient(135deg,#f97316,#ef4444);color:white;border:none;padding:1rem;border-radius:12px;font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;letter-spacing:0.05em;transition:all 0.3s;margin-top:1rem}
+.go-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(249,115,22,0.3)}
+#results{display:none}
+.decode-card{background:rgba(251,146,60,0.03);border:1px solid rgba(251,146,60,0.12);border-radius:16px;padding:2rem;margin-bottom:1.2rem;animation:fin .5s ease}
+@keyframes fin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.decode-section{margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(255,255,255,0.05)}
+.decode-section:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.decode-title{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:#fb923c;margin-bottom:0.7rem;font-family:'Syne',sans-serif}
+.decode-content{font-size:0.95rem;color:rgba(255,245,224,0.8);line-height:1.8}
+.swap-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.7rem;margin-top:0.7rem}
+.swap-item{background:rgba(251,146,60,0.06);border:1px solid rgba(251,146,60,0.15);border-radius:8px;padding:0.8rem}
+.swap-food{font-size:0.88rem;font-weight:500;color:#fff5e0;margin-bottom:0.2rem}
+.swap-why{font-size:0.75rem;color:rgba(255,245,224,0.45)}
+.ai-box{background:rgba(239,68,68,0.04);border:1px solid rgba(239,68,68,0.15);border-radius:16px;padding:1.5rem;margin-bottom:1.2rem}
+.ai-lbl{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#f87171;margin-bottom:0.7rem;font-family:'Syne',sans-serif}
+.ai-txt{font-size:0.95rem;color:rgba(255,245,224,0.75);line-height:1.85;font-style:italic;min-height:55px}
+.spin{animation:pulse 1.5s ease infinite;display:inline-block}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+.rbtn{background:transparent;border:1px solid rgba(251,146,60,0.25);color:rgba(251,146,60,0.6);padding:0.7rem 2rem;border-radius:50px;cursor:pointer;font-family:'Syne',sans-serif;font-size:0.8rem;transition:all 0.25s;margin-top:1rem}
+.rbtn:hover{border-color:#fb923c;color:#fb923c}
+.home-btn{display:inline-block;margin-top:0.8rem;color:rgba(251,146,60,0.35);text-decoration:none;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.25s}
+.home-btn:hover{color:#fb923c}
+@media(max-width:500px){.craving-grid{grid-template-columns:repeat(2,1fr)}.swap-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a href="../index.html" class="back">← All Modules</a>
+<div class="scr">
+  <div class="header">
+    <div class="badge"><span></span> Craving Science</div>
+    <div class="title">The Craving Decoder</div>
+    <p class="sub">Describe what you're craving right now. The AI decodes the psychology — emotion, deficiency, or behaviour — and gives you powerful nutrition swaps.</p>
+  </div>
+  <div id="formArea">
+    <div class="card">
+      <span class="label">What are you craving?</span>
+      <div class="craving-grid">
+        <button class="cv-btn" onclick="selectCraving(this,'chocolate')"><span class="cv-icon">🍫</span>Chocolate</button>
+        <button class="cv-btn" onclick="selectCraving(this,'salty')"><span class="cv-icon">🧂</span>Salt / Chips</button>
+        <button class="cv-btn" onclick="selectCraving(this,'carbs')"><span class="cv-icon">🍞</span>Carbs / Bread</button>
+        <button class="cv-btn" onclick="selectCraving(this,'sugar')"><span class="cv-icon">🍬</span>Sweet / Sugar</button>
+        <button class="cv-btn" onclick="selectCraving(this,'caffeine')"><span class="cv-icon">☕</span>Coffee</button>
+        <button class="cv-btn" onclick="selectCraving(this,'comfort')"><span class="cv-icon">🍜</span>Comfort Food</button>
+        <button class="cv-btn" onclick="selectCraving(this,'meat')"><span class="cv-icon">🥩</span>Meat / Protein</button>
+        <button class="cv-btn" onclick="selectCraving(this,'dairy')"><span class="cv-icon">🧀</span>Cheese / Dairy</button>
+        <button class="cv-btn" onclick="selectCraving(this,'nothing')"><span class="cv-icon">😶</span>Nothing at all</button>
+      </div>
+      <span class="label" style="margin-top:1rem">Any context? (optional)</span>
+      <input class="txt-input" id="contextInput" placeholder="e.g. stressed about exams, haven't eaten since morning...">
+      <button class="go-btn" onclick="decode()">Decode My Craving →</button>
+    </div>
+  </div>
+  <div id="results">
+    <div class="decode-card">
+      <div class="decode-section"><div class="decode-title">🔍 The Psychology Behind This Craving</div><div class="decode-content" id="psychContent"></div></div>
+      <div class="decode-section"><div class="decode-title">⚗️ What Your Body Is Actually Deficient In</div><div class="decode-content" id="defContent"></div></div>
+      <div class="decode-section"><div class="decode-title">🔄 Nutrition Swaps — Give Your Body What It Really Needs</div><div class="swap-grid" id="swapGrid"></div></div>
+    </div>
+    <div class="ai-box"><div class="ai-lbl">AI Craving Analysis</div><div class="ai-txt" id="aiTxt"><span class="spin">Decoding your craving...</span></div></div>
+    <div style="text-align:center">
+      <button class="rbtn" onclick="reset()">Decode Another Craving</button><br>
+      <a href="../index.html" class="home-btn">← Back to All Modules</a>
+    </div>
+  </div>
+</div>
+
+<script src="../js/fallback.js"></script>
+<script>
+let selectedCraving='';
+function selectCraving(btn,c){document.querySelectorAll('.cv-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');selectedCraving=c;}
+
+const CRAVING_DATA={
+  chocolate:{psych:"Chocolate cravings are often emotional — linked to loneliness, hormonal shifts, or a need for serotonin. The brain has learned that chocolate equals fast dopamine release, creating a conditioned emotional response.",def:"You may be deficient in magnesium (chocolate is rich in it), and your serotonin precursors (tryptophan) may be low.",swaps:[{f:"Dark chocolate 85%+",w:"Higher magnesium, less sugar"},{f:"Pumpkin seeds",w:"Rich in magnesium + zinc"},{f:"Brazil nuts",w:"Selenium + mood regulation"},{f:"Banana + almond butter",w:"Tryptophan + magnesium combo"}]},
+  salty:{psych:"Salt cravings signal stress. Cortisol causes the kidneys to excrete more sodium, so your body literally craves salt under pressure. The crunchy texture releases physical tension through the trigeminal nerve.",def:"Adrenal fatigue, dehydration, and electrolyte imbalance. Often paired with low potassium or magnesium.",swaps:[{f:"Salted pumpkin seeds",w:"Magnesium + satisfying crunch"},{f:"Olives",w:"Sodium + healthy fats"},{f:"Miso soup",w:"Electrolytes + gut-friendly"},{f:"Celery + hummus",w:"Crunch + potassium + protein"}]},
+  carbs:{psych:"Carb cravings are your brain's serotonin system speaking. Carbohydrates trigger insulin which clears competing amino acids from the blood, letting tryptophan flood the brain and convert to serotonin.",def:"Serotonin depletion, low blood sugar, or inadequate complex carbohydrate intake.",swaps:[{f:"Oats with honey",w:"Slow-release carbs + stable serotonin"},{f:"Sweet potato",w:"Complex carbs + B6 for serotonin"},{f:"Sourdough bread",w:"Lower glycaemic + gut-friendly"},{f:"Dates + tahini",w:"Natural sugar + protein to stabilise"}]},
+  sugar:{psych:"Sugar cravings are your dopamine system seeking a quick reward. Often triggered by stress, boredom, or blood sugar crashes. The brain has a reward pathway literally built for sweetness.",def:"Blood sugar instability, low dopamine, and possibly chromium deficiency which regulates insulin sensitivity.",swaps:[{f:"Mango or grapes",w:"Natural sugar + fibre + vitamins"},{f:"Greek yoghurt + honey",w:"Protein stabilises blood sugar"},{f:"Dates (2-3)",w:"Natural sweetness + fibre + potassium"},{f:"Cinnamon in warm oat milk",w:"Blood sugar regulation + warmth"}]},
+  caffeine:{psych:"Caffeine cravings signal your brain is in adenosine debt — the brain's own tiredness chemical accumulates when you rely on caffeine to suppress it. Psychologically this often reflects avoidance of rest.",def:"Adenosine system dysregulation, iron deficiency (fatigue), and often B12 or vitamin D deficiency causing persistent low energy.",swaps:[{f:"Matcha (green tea)",w:"L-theanine + gentler caffeine curve"},{f:"Maca powder in warm milk",w:"Adaptogenic energy without cortisol spike"},{f:"Iron-rich spinach + lemon",w:"Addresses root fatigue cause"},{f:"Cold water + a 20-min walk",w:"Natural cortisol boost, no crash"}]},
+  comfort:{psych:"Comfort food cravings are memory-based. The amygdala links familiar foods to emotional safety — you're not hungry for the food, you're hungry for the feeling it represents.",def:"Oxytocin and social connection. The gut-brain axis is seeking warm, familiar sensory input to signal safety to the nervous system.",swaps:[{f:"Homemade soup from scratch",w:"The process is therapeutic"},{f:"Warm daal or rice porridge",w:"Gut microbiome safety signal"},{f:"Baked oats with banana",w:"Warm, sweet, satisfying"},{f:"Yoghurt with cardamom + honey",w:"Fermented gut comfort"}]},
+  meat:{psych:"Protein cravings often signal genuine physical depletion — from exercise, stress, or inadequate intake. They can also reflect a need for groundedness and physical substance.",def:"Iron deficiency is common in students. Also zinc, B12, and complete amino acid depletion from high cognitive workload.",swaps:[{f:"Lentils + turmeric dahl",w:"Iron + zinc + anti-inflammatory"},{f:"Eggs (2-3)",w:"Complete protein + B12 + choline"},{f:"Chickpea bowl",w:"Plant protein + iron"},{f:"Tofu stir-fry with greens",w:"Complete amino acids + iron absorption"}]},
+  dairy:{psych:"Dairy cravings often involve casein — a slow-digesting protein that produces a mild opioid-like response in the brain. It is literally slightly addictive, which is why cheese can be hard to resist.",def:"Calcium, phosphorus, and sometimes vitamin D deficiency. Casein cravings can also signal a need for calming tryptophan in milk.",swaps:[{f:"Greek yoghurt",w:"High protein + probiotics + calcium"},{f:"Kefir",w:"Fermented dairy — gut + calcium"},{f:"Fortified oat milk",w:"Calcium without casomorphin effect"},{f:"Sesame seeds + tahini",w:"Highest plant calcium source"}]},
+  nothing:{psych:"Loss of appetite is often a stress response — cortisol and adrenaline suppress the digestive system. Emotionally it can signal overwhelm, depression, or grief. The body shuts down hunger when it perceives threat.",def:"Despite not feeling hungry, the body is likely depleted in key nutrients. The gut-brain axis signals 'not safe' so digestion slows.",swaps:[{f:"Small fruit smoothie",w:"Easy to consume, nutrient-dense"},{f:"A small handful of nuts",w:"Calorie-dense, no prep needed"},{f:"Warm broth or miso soup",w:"Nourishing without triggering nausea"},{f:"Banana (just one)",w:"Gentle on digestion, mood-supporting"}]}
+};
+
+async function decode(){
+  if(!selectedCraving){alert('Please select a craving first.');return;}
+  const ctx=document.getElementById('contextInput').value;
+  const data=CRAVING_DATA[selectedCraving];
+  document.getElementById('formArea').style.display='none';
+  document.getElementById('results').style.display='block';
+  document.getElementById('psychContent').textContent=data.psych;
+  document.getElementById('defContent').textContent=data.def;
+  const sg=document.getElementById('swapGrid');sg.innerHTML='';
+  data.swaps.forEach(s=>{const d=document.createElement('div');d.className='swap-item';d.innerHTML=`<div class="swap-food">🔄 ${s.f}</div><div class="swap-why">${s.w}</div>`;sg.appendChild(d);});
+
+  // ── SMART AI with automatic fallback ──
+  const prompt=`You are a nutritional psychologist. A university student is craving ${selectedCraving}. Context: "${ctx||'none'}". Psychology: "${data.psych}". Write a 2-3 sentence personal craving analysis. Warm, insightful, direct. Reference context if given. Under 80 words. No bullets.`;
+  const text=await smartAI(prompt,()=>FALLBACK.craving(selectedCraving,ctx));
+  document.getElementById('aiTxt').textContent=text;
+}
+
+function reset(){selectedCraving='';document.getElementById('formArea').style.display='block';document.getElementById('results').style.display='none';document.querySelectorAll('.cv-btn').forEach(b=>b.classList.remove('active'));document.getElementById('contextInput').value='';}
+</script>
+</body>
+</html>
