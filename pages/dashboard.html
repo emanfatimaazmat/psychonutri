@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard · PsychoNutri</title>
+<link rel="stylesheet" href="../css/main.css">
+<style>
+body{padding-top:5rem}
+.dash-wrap{max-width:900px;margin:0 auto;padding:2rem}
+.dash-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem}
+.dash-heading{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:700;color:#f0ebe0}
+.dash-actions{display:flex;gap:0.8rem}
+.reset-btn{background:transparent;border:1px solid rgba(239,68,68,0.25);color:rgba(239,68,68,0.5);padding:0.5rem 1.2rem;border-radius:50px;cursor:pointer;font-family:'Syne',sans-serif;font-size:0.75rem;letter-spacing:0.08em;transition:all 0.25s}
+.reset-btn:hover{border-color:rgba(239,68,68,0.6);color:#ef4444}
+.empty-state{text-align:center;padding:4rem 2rem;color:rgba(240,235,224,0.35)}
+.empty-state .es-icon{font-size:3rem;margin-bottom:1rem;display:block}
+.empty-state .es-title{font-family:'Syne',sans-serif;font-size:1.1rem;margin-bottom:0.5rem;color:rgba(240,235,224,0.5)}
+.empty-state .es-sub{font-size:0.85rem;line-height:1.7;margin-bottom:1.5rem}
+.checkin-wrap{margin-bottom:1.5rem}
+</style>
+</head>
+<body>
+<nav class="pn-nav">
+  <a href="../index.html" class="pn-logo">PsychoNutri</a>
+  <ul class="pn-nav-links">
+    <li><a href="../index.html#modules">Modules</a></li>
+    <li><a href="../index.html#features">Features</a></li>
+  </ul>
+  <div class="pn-nav-right">
+    <div class="pn-xp-pill">⚡ <span id="nav-xp">0</span> XP</div>
+  </div>
+</nav>
+
+<div class="dash-wrap">
+  <div class="dash-top">
+    <div class="dash-heading">📊 My Dashboard</div>
+    <div class="dash-actions">
+      <button class="reset-btn" onclick="resetProfile()">Reset Progress</button>
+    </div>
+  </div>
+
+  <!-- Daily Check-In -->
+  <div class="checkin-card checkin-wrap" id="checkinCard">
+    <div class="checkin-title">🔥 Daily Streak</div>
+    <div class="checkin-grid" id="checkinGrid"></div>
+  </div>
+
+  <div id="dashboard-root"></div>
+
+  <!-- Empty state shown if no modules done -->
+  <div id="emptyState" class="empty-state" style="display:none">
+    <span class="es-icon">🌑</span>
+    <div class="es-title">Your journey hasn't started yet</div>
+    <p class="es-sub">Complete your first module to start tracking progress, earning XP, and unlocking badges.</p>
+    <a href="../index.html#modules" class="btn btn-primary btn-md">Choose a Module</a>
+  </div>
+</div>
+
+<!-- Oracle -->
+<button class="oracle-fab" onclick="toggleOracle()" title="Ask The Oracle">🔮</button>
+<div class="oracle-panel" id="oraclePanel">
+  <div class="oracle-header">
+    <div class="oracle-header-title">🔮 The Oracle</div>
+    <button class="oracle-close" onclick="toggleOracle()">✕</button>
+  </div>
+  <div class="oracle-msgs" id="oracleMsgs">
+    <div class="oracle-msg ai">Your dashboard shows your journey so far. Ask me anything about nutrition or psychology.</div>
+  </div>
+  <div class="oracle-input-row">
+    <input class="oracle-input" id="oracleInput" placeholder="Ask the oracle..." onkeydown="if(event.key==='Enter')sendOracle()">
+    <button class="oracle-send" onclick="sendOracle()">→</button>
+  </div>
+</div>
+
+<script src="../js/core.js"></script>
+<script src="../js/dashboard.js"></script>
+<script>
+function renderCheckin() {
+  const p = Profile.get();
+  const grid = document.getElementById('checkinGrid');
+  if (!grid) return;
+  for (let i = 6; i >= 0; i--) {
+    const d = document.createElement('div');
+    const date = new Date(Date.now() - i * 86400000);
+    const label = ['Su','Mo','Tu','We','Th','Fr','Sa'][date.getDay()];
+    const isToday = i === 0;
+    const active = i < p.streak;
+    d.className = 'checkin-day ' + (active ? 'done' : 'empty');
+    d.textContent = isToday ? '📍' : label;
+    d.title = date.toDateString();
+    grid.appendChild(d);
+  }
+}
+
+function toggleOracle() {
+  document.getElementById('oraclePanel').classList.toggle('open');
+}
+
+async function sendOracle() {
+  const input = document.getElementById('oracleInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value = '';
+  const msgs = document.getElementById('oracleMsgs');
+  const u = document.createElement('div');u.className='oracle-msg user';u.textContent=msg;msgs.appendChild(u);
+  const a = document.createElement('div');a.className='oracle-msg ai';a.innerHTML='<span class="spin">thinking...</span>';msgs.appendChild(a);
+  msgs.scrollTop=msgs.scrollHeight;
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:'You are the Oracle of PsychoNutri. Answer nutrition and psychology questions for university students. Be concise, warm, insightful. Under 80 words.',messages:[{role:'user',content:msg}]})});
+    const data = await res.json();
+    a.textContent = data.content?.find(c=>c.type==='text')?.text||'The oracle is momentarily silent.';
+  } catch(e) { a.textContent='Cannot reach the oracle right now.'; }
+  msgs.scrollTop=msgs.scrollHeight;
+}
+
+// update nav xp
+document.getElementById('nav-xp').textContent = Profile.get().xp;
+
+// show empty state if nothing done
+const p = Profile.get();
+if (p.completedModules.length === 0) {
+  document.getElementById('emptyState').style.display = 'block';
+  document.getElementById('dashboard-root').style.display = 'none';
+}
+
+initCursor('#f0c060');
+renderCheckin();
+</script>
+</body>
+</html>
