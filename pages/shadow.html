@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feed Your Shadow · PsychoNutri</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Crimson+Text:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#06030a;color:#e8d5b0;font-family:'Crimson Text',Georgia,serif;min-height:100vh;overflow-x:hidden}
+.par{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.pc{position:absolute;border-radius:50%;animation:drift linear infinite;opacity:0}
+@keyframes drift{0%{transform:translateY(100vh);opacity:0}10%{opacity:.12}90%{opacity:.05}100%{transform:translateY(-5vh) translateX(var(--dx));opacity:0}}
+.back{position:fixed;top:1.2rem;left:1.5rem;z-index:100;color:rgba(232,213,176,0.4);text-decoration:none;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.3s;font-family:'Cinzel',serif}.back:hover{color:#c9a96e}
+.scr{position:relative;z-index:1;max-width:660px;margin:0 auto}
+#intro{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem}
+.sigil{width:80px;height:80px;margin-bottom:1.8rem;animation:rot 20s linear infinite}
+@keyframes rot{to{transform:rotate(360deg)}}
+.gtitle{font-family:'Cinzel',serif;font-size:2.6rem;font-weight:600;color:#c9a96e;letter-spacing:.08em;margin-bottom:.5rem}
+.gsub{font-size:1rem;color:#7a6a50;font-style:italic;margin-bottom:1.6rem}
+.lore{max-width:420px;font-size:1rem;line-height:1.9;color:#b5a48a;margin-bottom:2.2rem}
+.pbtn{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.18em;padding:.88rem 2.5rem;background:transparent;border:1px solid #c9a96e;color:#c9a96e;cursor:pointer;transition:all .35s;text-transform:uppercase}
+.pbtn:hover{background:rgba(201,169,110,.1)}
+#rscr{display:none;min-height:100vh;padding-bottom:4rem}
+.rhdr{padding:1.4rem 2rem 1rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;background:#06030a;z-index:10}
+.rico{font-size:1.8rem;width:42px;text-align:center}
+.rname{font-family:'Cinzel',serif;font-size:.88rem;color:#c9a96e;letter-spacing:.1em;text-transform:uppercase}
+.rdesc{font-size:.78rem;color:#6a5f4a;font-style:italic;margin-top:2px}
+.mwrap{margin-left:auto;text-align:right}
+.mlbl{font-size:.6rem;color:#6a5f4a;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.mbar{width:120px;height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.mfill{height:100%;border-radius:2px;background:linear-gradient(90deg,#6e3a55,#c9a96e);transition:width 1s ease}
+.qa{padding:2rem 2rem 1rem}
+.qnum{font-size:.6rem;color:#5a4f3a;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.7rem}
+.qt{font-size:1.22rem;line-height:1.8;color:#ddd0b0;margin-bottom:1.7rem;font-style:italic}
+.og{display:grid;gap:.5rem}
+.ob{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);color:#b5a48a;padding:.88rem 1.1rem;text-align:left;cursor:pointer;font-family:'Crimson Text',serif;font-size:.98rem;line-height:1.55;transition:all .25s;border-radius:2px}
+.ob:hover{background:rgba(201,169,110,.07);border-color:rgba(201,169,110,.3);color:#e8d5b0;padding-left:1.4rem}
+.ob.cor{background:rgba(74,139,100,.12);border-color:rgba(74,139,100,.5);color:#a8e8be}
+.ob.wrg{background:rgba(139,74,74,.08);border-color:rgba(139,74,74,.28);color:#e8a8a8;opacity:.65}
+.fb{margin-top:1rem;padding:1rem 1.1rem;background:rgba(201,169,110,.03);border-left:2px solid rgba(201,169,110,.32);font-size:.88rem;color:#c9b090;line-height:1.8;display:none;animation:fin .5s ease}
+@keyframes fin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.nbtn{display:none;margin:.9rem 2rem 1.4rem;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.14em;padding:.68rem 1.9rem;background:transparent;border:1px solid rgba(201,169,110,.4);color:#c9a96e;cursor:pointer;text-transform:uppercase;transition:all .25s}
+.nbtn:hover{background:rgba(201,169,110,.08)}
+#uscr{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem}
+.acard{max-width:380px;width:100%;border:1px solid rgba(201,169,110,.3);padding:1.9rem;background:rgba(10,6,15,.9);margin:1.1rem 0;animation:fin .6s ease}
+.aseal{font-size:2.8rem;margin-bottom:.8rem}
+.aname{font-family:'Cinzel',serif;font-size:1.1rem;color:#c9a96e;letter-spacing:.1em;margin-bottom:.65rem}
+.ainsight{font-size:.9rem;color:#b5a48a;line-height:1.85;font-style:italic}
+.anutr{margin-top:.9rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.06);font-size:.8rem;color:#7a6e56;line-height:1.7}
+.meals{margin-top:.9rem;padding:.85rem;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.05)}
+.mtitle{font-size:.63rem;color:#8b7a5a;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.55rem;font-family:'Cinzel',serif}
+.mi{font-size:.82rem;color:#9a8a6a;line-height:1.65;padding:.2rem 0;border-bottom:1px solid rgba(255,255,255,.04)}.mi:last-child{border-bottom:none}
+.aibox{max-width:380px;width:100%;background:rgba(139,74,110,.04);border:1px solid rgba(139,74,110,.18);padding:1.2rem;margin-top:.9rem;text-align:left}
+.ailbl{font-size:.6rem;color:#8b4a6e;letter-spacing:.16em;text-transform:uppercase;margin-bottom:.5rem;font-family:'Cinzel',serif}
+.aitxt{font-size:.88rem;color:#c9b090;line-height:1.85;font-style:italic;min-height:55px}
+.spin{animation:pulse 1.5s ease infinite;display:inline-block}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+#fscr{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem}
+.ftitle{font-family:'Cinzel',serif;font-size:1.6rem;color:#c9a96e;letter-spacing:.08em;margin-bottom:.4rem}
+.fsub{font-size:.88rem;color:#6a5f4a;font-style:italic;margin-bottom:.8rem}
+.fpts{font-family:'Cinzel',serif;font-size:.85rem;color:#8b6e4e;letter-spacing:.12em;margin-bottom:1.1rem}
+.scard{max-width:360px;width:100%;border:1px solid rgba(201,169,110,.32);padding:1.7rem;background:#0c080f;margin:.7rem auto}
+.sctop{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.22em;color:#5a4f3a;text-transform:uppercase;margin-bottom:.55rem}
+.scname{font-family:'Cinzel',serif;font-size:1.3rem;color:#c9a96e;margin-bottom:.35rem}
+.scquote{font-size:.86rem;color:#8a7a60;font-style:italic;line-height:1.75;margin-bottom:.8rem}
+.mwp{width:220px;height:220px;margin:.7rem auto}
+.bdgs{display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap;margin:.5rem 0}
+.bdg{padding:.22rem .68rem;border:1px solid rgba(201,169,110,.2);font-size:.65rem;color:#7a6e56;font-family:'Cinzel',serif}
+.aiprof{max-width:360px;width:100%;background:rgba(139,74,110,.04);border:1px solid rgba(139,74,110,.18);padding:1.2rem;margin:.65rem auto;text-align:left}
+.fmsg{max-width:360px;font-size:.86rem;color:#7a6e56;font-style:italic;line-height:1.85;margin:.7rem 0}
+.rbtn{margin-top:.6rem;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.14em;padding:.65rem 1.7rem;background:transparent;border:1px solid rgba(201,169,110,.2);color:#7a6e56;cursor:pointer;text-transform:uppercase;transition:all .25s}.rbtn:hover{color:#c9a96e;border-color:rgba(201,169,110,.5)}
+.cpbtn{margin-top:.4rem;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.1em;padding:.48rem 1.3rem;background:transparent;border:1px solid rgba(201,169,110,.16);color:#6a5f4a;cursor:pointer;text-transform:uppercase;transition:all .22s}.cpbtn:hover{color:#c9a96e}
+.home-btn{display:inline-block;margin-top:.7rem;color:rgba(201,169,110,.35);text-decoration:none;font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;transition:color .25s}.home-btn:hover{color:#c9a96e}
+.xp-pop{position:fixed;top:5rem;right:2rem;z-index:999;font-family:'Cinzel',serif;font-size:1rem;color:#f0c060;pointer-events:none;animation:xpUp 1.4s ease forwards}
+@keyframes xpUp{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-45px)}}
+</style>
+</head>
+<body>
+<div class="par" id="par"></div>
+<a href="../index.html" class="back">← All Modules</a>
+<div id="intro" class="scr">
+  <svg class="sigil" width="80" height="80" viewBox="0 0 80 80" fill="none">
+    <circle cx="40" cy="40" r="36" stroke="#c9a96e" stroke-width=".8" opacity=".5"/>
+    <circle cx="40" cy="40" r="24" stroke="#c9a96e" stroke-width=".5" opacity=".3"/>
+    <path d="M40 10L43 34L68 37L43 44L48 70L40 48L32 70L37 44L12 37L37 34Z" fill="none" stroke="#c9a96e" stroke-width=".85" opacity=".72"/>
+    <circle cx="40" cy="40" r="3" fill="#c9a96e" opacity=".85"/>
+  </svg>
+  <div class="gtitle">Feed Your Shadow</div>
+  <div class="gsub">A journey into the hunger beneath</div>
+  <p class="lore">Your cravings are not random. They are messages from the parts of yourself you have not yet met. Journey through five shadow realms — each a hidden emotional world expressed through what you eat.</p>
+  <button class="pbtn" onclick="startGame()">Enter the Shadow</button>
+</div>
+<div id="rscr" class="scr">
+  <div class="rhdr">
+    <div class="rico" id="rico"></div>
+    <div><div class="rname" id="rname"></div><div class="rdesc" id="rdesc"></div></div>
+    <div class="mwrap"><div class="mlbl">Shadow revealed</div><div class="mbar"><div class="mfill" id="mfill" style="width:0%"></div></div></div>
+  </div>
+  <div class="qa">
+    <div class="qnum" id="qnum"></div>
+    <div class="qt" id="qt"></div>
+    <div class="og" id="og"></div>
+    <div class="fb" id="fb"></div>
+  </div>
+  <button class="nbtn" id="nbtn" onclick="nextQ()">Continue →</button>
+</div>
+<div id="uscr" class="scr" style="display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;min-height:100vh">
+  <div style="font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:#5a4f3a;margin-bottom:.35rem;font-family:'Cinzel',serif">Realm Sealed</div>
+  <div class="acard">
+    <div class="aseal" id="useal"></div><div class="aname" id="uname"></div>
+    <div class="ainsight" id="uinsight"></div><div class="anutr" id="anutr"></div>
+    <div class="meals"><div class="mtitle">Prescribed Meals</div><div id="mlist"></div></div>
+  </div>
+  <div class="aibox"><div class="ailbl">AI Shadow Reading</div><div class="aitxt" id="aitxt"><span class="spin">The oracle reads your shadow...</span></div></div>
+  <button class="pbtn" id="unbtn" onclick="continueU()" style="margin-top:1.1rem">Descend Deeper →</button>
+</div>
+<div id="fscr" class="scr" style="display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem 2rem;min-height:100vh">
+  <div class="ftitle" id="ftitle"></div><div class="fsub" id="fsub"></div><div class="fpts" id="fpts"></div>
+  <div class="scard">
+    <div class="sctop">Feed Your Shadow · Shadow Profile</div>
+    <div class="scname" id="scname"></div><div class="scquote" id="scquote"></div>
+    <div class="mwp"><svg id="msv" viewBox="0 0 220 220" width="220" height="220"></svg></div>
+    <div class="bdgs" id="bdgs"></div>
+  </div>
+  <div class="aiprof"><div class="ailbl">Your AI Psychological Profile</div><div class="aitxt" id="aiptxt"><span class="spin">Generating your deep profile...</span></div></div>
+  <button class="cpbtn" onclick="copyCard()">Copy Shadow Card</button>
+  <p class="fmsg" id="fmsg"></p>
+  <button class="rbtn" onclick="restartGame()">Begin Again</button>
+  <a href="../index.html" class="home-btn">← Back to All Modules</a>
+</div>
+
+<script src="../js/fallback.js"></script>
+<script>
+const REALMS=[
+  {id:"void",icon:"◉",name:"The Hunger Void",color:"#8b4a6e",desc:"Where emptiness wears the mask of hunger",arch:"The Void Feeder",seal:"◈",insight:"You eat to fill a space that food cannot reach. Your shadow craves connection and meaning — not calories.",nutr:"Your body calls for magnesium and tryptophan — dark leafy greens, pumpkin seeds, and warm broths.",meals:["Warm lentil soup with spinach + turmeric","Pumpkin seed trail mix with dark chocolate (70%)","Chamomile oat porridge before bed","Banana with almond butter — serotonin bridge"],qs:[{q:"When you reach for food late at night, what is usually true?",o:["I'm genuinely hungry from the day","Something feels unfinished or unsettled","It's purely habit and routine","I need stimulation — boredom mostly"],c:1,f:"Night eating is linked to unprocessed emotional states. Your brain seeks dopamine closure through food when it cannot find it elsewhere."},{q:"Which craving hits hardest when you feel overwhelmed?",o:["Sweet and soft — cake, ice cream, cookies","Salty and crunchy — chips, pretzels","Dense and warm — pasta, bread, rice","Nothing — I lose my appetite completely"],c:0,f:"Sweet cravings under stress signal a serotonin need. The shadow underneath is often a longing for sweetness in relationships, not food."},{q:"How often do you eat past fullness without realising it?",o:["Rarely — I'm in tune with satiety","Sometimes when distracted","Often — especially when emotions run high","Almost always — fullness signals don't register"],c:2,f:"Eating past satiety is linked to emotional numbing. The vagus nerve becomes blunted under chronic emotional suppression."}]},
+  {id:"fog",icon:"◎",name:"The Fog Forest",color:"#4a6e8b",desc:"Where mental exhaustion dims the inner light",arch:"The Fog Wanderer",seal:"◍",insight:"Your mind runs on caffeine because it no longer trusts its own energy. The fog is unacknowledged overwhelm wearing the disguise of tiredness.",nutr:"Your brain needs choline, omega-3s, and B vitamins — eggs, fatty fish, and leafy greens rebuild neural clarity.",meals:["Salmon + wilted kale with lemon — omega-3 boost","Egg and avocado on rye — choline + healthy fats","Blueberry walnut smoothie — BDNF support","Green tea — L-theanine + gentle caffeine"],qs:[{q:"How many times do you reach for caffeine as a first response to low energy?",o:["Almost always — it's my default","Sometimes when I can't afford to rest","Rarely — I try to rest or move instead","Never — I don't rely on caffeine"],c:0,f:"Frequent caffeine reliance suppresses your natural adenosine signalling — reflecting a difficulty accepting rest."},{q:"When brain fog hits, your instinct is to:",o:["Eat something sweet or starchy immediately","Push through with sheer willpower","Withdraw and isolate quietly","Reach out and talk to someone"],c:2,f:"Withdrawal during cognitive fatigue is a protective shadow response. Social connection lowers cortisol and restores prefrontal clarity."},{q:"How would you describe your relationship with rest?",o:["I rest freely without guilt","I rest only when I've earned it","I feel anxious when not being productive","Rest feels impossible — my mind won't stop"],c:2,f:"Rest anxiety is a hallmark of high-functioning burnout. This depletes magnesium and B6 rapidly."}]},
+  {id:"cave",icon:"◇",name:"The Control Cave",color:"#6e8b4a",desc:"Where order becomes armour against chaos",arch:"The Sovereign",seal:"◆",insight:"You control what you eat because so much else feels uncontrollable. The food rules are architecture your psyche built when life felt unsafe.",nutr:"Your body needs zinc and iron — lentils, red meat, and toasted seeds — and permission to eat without a rulebook.",meals:["Red lentil dahl with cumin — grounding + iron","Beef and vegetable stir fry — zinc replenishment","Toasted pumpkin seeds on yoghurt — minerals","Warm spiced milk with ashwagandha before sleep"],qs:[{q:"When someone disrupts your food routine unexpectedly, you feel:",o:["Completely fine — I adapt easily","Mildly irritated but manageable","Genuinely anxious or thrown off","Angry in a disproportionate way"],c:2,f:"Anxiety around disrupted food routines signals control-based eating. The food rule is rarely about food — it's a boundary around a deeper vulnerability."},{q:"Which best describes your relationship with 'bad' foods?",o:["I don't label foods as bad","I enjoy them occasionally without guilt","I feel guilty after eating them","I avoid them entirely — even thinking creates tension"],c:3,f:"Cognitive restraint in eating is linked to all-or-nothing thinking. Restriction cycles increase cravings and dysregulate hunger hormones."},{q:"How do you feel when your eating is 'off plan'?",o:["Neutral — one meal doesn't define anything","Mildly disappointed but I move on","Like I've failed and need to compensate","Spiralling — one bad choice leads to many"],c:3,f:"Compensatory thinking after eating mistakes reflects perfectionist psychology driving restriction-binge cycles."}]},
+  {id:"sea",icon:"◑",name:"The Comfort Sea",color:"#8b7a4a",desc:"Where nostalgia is the hungriest ghost",arch:"The Memory Keeper",seal:"◐",insight:"You eat the past. Comfort foods are time machines — each bite a return to a moment when someone made you feel held. You are not hungry. You are homesick.",nutr:"Your body carries emotional memory in its gut microbiome. Fermented foods and warm broths create physiological safety signals.",meals:["Khichdi or rice porridge — warmth + safety","Homemade soup from scratch — process as therapy","Yoghurt with honey and cardamom — gut comfort","Slow-cooked daal or stew — patience + nourishment"],qs:[{q:"Is there a specific food that instantly transports you to a memory?",o:["Yes — and thinking about it brings emotion","Yes — but it's just nostalgia, nothing deep","Not really — food is mostly fuel","I avoid those foods because feelings are painful"],c:0,f:"Food-memory encoding is one of the strongest forms of emotional conditioning. The amygdala links sensory data directly to emotional states — state-dependent memory retrieval."},{q:"When you feel lonely, which impulse is strongest?",o:["Cook something from scratch — process soothes me","Order your most familiar comfort meal","Eat whatever is easiest","Lose your appetite completely"],c:1,f:"Ordering familiar foods under loneliness recreates a 'safe other'. You are not craving the food. You are craving being known."},{q:"Which is most true about how you use food socially?",o:["Food is how I show love to others","Eating together is when I feel most myself","I often eat alone even when others are around","I use food as an excuse to connect — company matters more"],c:3,f:"When company matters more than food, it reveals an attachment orientation — your shadow is malnourished in connection, not calories."}]},
+  {id:"kitchen",icon:"◕",name:"The Rage Kitchen",color:"#8b5a4a",desc:"Where swallowed fire becomes appetite",arch:"The Suppressed Flame",seal:"◔",insight:"You eat your anger. What you could not say, your body converts into craving — for salt, heat, and crunch. Every unsaid thing is looking for an exit.",nutr:"Repressed stress floods your body with cortisol. Magnesium-rich foods — dark chocolate, avocado, almonds — down-regulate your stress response at the cellular level.",meals:["Dark chocolate (85%) + almonds — magnesium","Avocado on sourdough with chilli — adrenal support","Chamomile + ashwagandha tea — cortisol regulation","Baked oats with banana — serotonin at night"],qs:[{q:"After a frustrating interaction, you most often:",o:["Talk it through with someone immediately","Exercise or move your body to release it","Reach for food — especially salty or crunchy things","Silently absorb it and carry it for days"],c:2,f:"Salt and crunchy textures release physical tension via the trigeminal nerve. But the frustration remains after the chips are gone."},{q:"Which is most true about how you handle conflict?",o:["I express it directly and move on","I hold it in and let it dissolve","I let it out at the wrong moment or person","I redirect it into productivity"],c:1,f:"Swallowing conflict is one of the most common pathways to emotional eating. Chronic conflict suppression measurably elevates ghrelin — the hunger hormone."},{q:"How often do you eat quickly, almost urgently?",o:["Rarely — I eat slowly","Sometimes when rushed","Often — speed feels right","Almost always — I barely taste what I eat"],c:2,f:"Rapid eating is a physiological signature of dysregulated stress. When cortisol is high, rest-and-digest is suppressed — your body literalises urgency through eating speed."}]}
+];
+
+let S={ri:0,qi:0,pts:0,ans:false,scores:[0,0,0,0,0],log:[]};
+
+function mkP(){const c=document.getElementById('par');for(let i=0;i<22;i++){const p=document.createElement('div');p.className='pc';const sz=Math.random()*3+1,h=Math.random()>.5?'#c9a96e':'#8b4a6e';p.style.cssText=`width:${sz}px;height:${sz}px;background:${h};left:${Math.random()*100}%;bottom:0;--dx:${(Math.random()-.5)*90}px;animation-duration:${8+Math.random()*10}s;animation-delay:${Math.random()*12}s`;c.appendChild(p);}}
+function show(id){['intro','rscr','uscr','fscr'].forEach(s=>{const el=document.getElementById(s);if(el)el.style.display='none';});const t=document.getElementById(id);if(!t)return;t.style.display=(id==='intro'||id==='rscr')?'block':'flex';window.scrollTo(0,0);}
+function startGame(){S={ri:0,qi:0,pts:0,ans:false,scores:[0,0,0,0,0],log:[]};loadRealm();show('rscr');}
+function loadRealm(){const r=REALMS[S.ri];document.getElementById('rico').textContent=r.icon;document.getElementById('rname').textContent=r.name;document.getElementById('rdesc').textContent=r.desc;S.qi=0;S.ans=false;loadQ();}
+function loadQ(){const r=REALMS[S.ri],q=r.qs[S.qi];const total=REALMS.reduce((a,x)=>a+x.qs.length,0);const done=REALMS.slice(0,S.ri).reduce((a,x)=>a+x.qs.length,0)+S.qi;document.getElementById('qnum').textContent=`Realm ${S.ri+1} of 5 · Q${S.qi+1} of ${r.qs.length}`;document.getElementById('qt').textContent=q.q;document.getElementById('fb').style.display='none';document.getElementById('nbtn').style.display='none';S.ans=false;document.getElementById('mfill').style.width=Math.round(done/total*100)+'%';const g=document.getElementById('og');g.innerHTML='';q.o.forEach((o,i)=>{const b=document.createElement('button');b.className='ob';b.textContent=o;b.onclick=()=>pick(i,b);g.appendChild(b);});}
+function pick(idx,btn){if(S.ans)return;S.ans=true;const q=REALMS[S.ri].qs[S.qi];const ok=idx===q.c;S.log.push({realm:REALMS[S.ri].id,q:q.q,chosen:q.o[idx],ok});document.querySelectorAll('.ob').forEach((b,i)=>{if(i===q.c)b.classList.add('cor');else if(i===idx&&!ok)b.classList.add('wrg');b.onclick=null;});const pts=ok?10:5;S.scores[S.ri]+=pts;S.pts+=pts;const xp=document.createElement('div');xp.className='xp-pop';xp.textContent='+'+pts+' XP';document.body.appendChild(xp);setTimeout(()=>xp.remove(),1400);document.getElementById('fb').textContent=q.f;document.getElementById('fb').style.display='block';document.getElementById('nbtn').style.display='block';}
+function nextQ(){S.qi++;if(S.qi>=REALMS[S.ri].qs.length)showUnlock();else loadQ();}
+async function showUnlock(){const r=REALMS[S.ri];document.getElementById('useal').textContent=r.seal;document.getElementById('uname').textContent=r.arch;document.getElementById('uinsight').textContent=r.insight;document.getElementById('anutr').textContent='⬡ '+r.nutr;const ml=document.getElementById('mlist');ml.innerHTML='';r.meals.forEach(m=>{const d=document.createElement('div');d.className='mi';d.textContent='· '+m;ml.appendChild(d);});document.getElementById('unbtn').textContent=S.ri>=REALMS.length-1?'Reveal Your Shadow Self →':'Descend Deeper →';document.getElementById('aitxt').innerHTML='<span class="spin">The oracle reads your shadow...</span>';show('uscr');const recent=S.log.filter(a=>a.realm===r.id);const prompt=`You are a Jungian psychologist for "Feed Your Shadow". User completed "${r.name}" realm (archetype: ${r.arch}). Answers: ${recent.map(a=>`"${a.q}"→"${a.chosen}"(${a.ok?'resonant':'exploring'})`).join('; ')}. Write 2-3 sentence poetic shadow reading. Address user directly. Under 75 words. No bullets.`;const text=await smartAI(prompt,()=>FALLBACK.shadowRealm.getResponse(r.id));document.getElementById('aitxt').textContent=text;}
+function continueU(){S.ri++;if(S.ri>=REALMS.length)showFinal();else{loadRealm();show('rscr');}}
+async function showFinal(){const mx=Math.max(...S.scores);const di=S.scores.indexOf(mx);const dom=REALMS[di];const total=REALMS.reduce((a,r)=>a+r.qs.length,0)*10;const pct=Math.round(S.pts/total*100);document.getElementById('ftitle').textContent=dom.arch;document.getElementById('fsub').textContent=dom.name+' is your dominant shadow';document.getElementById('fpts').textContent=S.pts+' shadow points · '+pct+'% revealed';document.getElementById('scname').textContent=dom.arch;const quotes=["You eat to fill a space that food cannot reach.","Your mind runs on borrowed fuel — it deserves real rest.","The rules you built around food were built to keep you safe.","You are not hungry. You are homesick.","Every unsaid word lives somewhere in your body."];document.getElementById('scquote').textContent='"'+quotes[di]+'"';const bdg=document.getElementById('bdgs');bdg.innerHTML='';REALMS.forEach(r=>{const b=document.createElement('div');b.className='bdg';b.textContent=r.seal+' '+r.id;bdg.appendChild(b);});drawMap();show('fscr');const scores=REALMS.map((r,i)=>r.name+': '+S.scores[i]+'pts').join(', ');const log=S.log.map(a=>`[${a.realm}] "${a.q}"→"${a.chosen}"`).join('\n');const prompt=`You are a Jungian psychologist. User completed all 5 shadow realms. Scores: ${scores}. Dominant archetype: ${dom.arch}. Answers:\n${log}\n\nWrite 3-4 sentence personal profile weaving Jungian shadow theory, emotional eating, nutritional psychology. Poetic, compassionate. Under 110 words. No bullets.`;const text=await smartAI(prompt,()=>FALLBACK.shadowProfile.getResponse(dom.id));document.getElementById('aiptxt').textContent=text;document.getElementById('fmsg').textContent='The shadow does not ask to be fixed. It asks to be met.';}
+function drawMap(){const svg=document.getElementById('msv');const cx=110,cy=110,r=82;const mx=Math.max(...S.scores)||1;const pts=S.scores.map(s=>0.22+(s/mx)*0.78);const cols=REALMS.map(x=>x.color);let poly='';pts.forEach((p,i)=>{const a=(i/pts.length)*2*Math.PI-Math.PI/2;poly+=`${cx+Math.cos(a)*p*r},${cy+Math.sin(a)*p*r} `;});let h='';[r,r*.66,r*.33].forEach(cr=>h+=`<circle cx="${cx}" cy="${cy}" r="${cr}" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>`);pts.forEach((_,i)=>{const a=(i/pts.length)*2*Math.PI-Math.PI/2;h+=`<line x1="${cx}" y1="${cy}" x2="${cx+Math.cos(a)*r}" y2="${cy+Math.sin(a)*r}" stroke="rgba(255,255,255,0.04)" stroke-width="0.5"/>`;});h+=`<polygon points="${poly}" fill="rgba(139,74,110,0.18)" stroke="#c9a96e" stroke-width="0.8"/>`;pts.forEach((p,i)=>{const a=(i/pts.length)*2*Math.PI-Math.PI/2;const pr=p*r;h+=`<circle cx="${cx+Math.cos(a)*pr}" cy="${cy+Math.sin(a)*pr}" r="3" fill="${cols[i]}" opacity="0.9"/>`;h+=`<text x="${cx+Math.cos(a)*(r+16)}" y="${cy+Math.sin(a)*(r+16)+4}" text-anchor="middle" font-size="9" fill="#6a5f4a" font-family="serif">${REALMS[i].icon}</text>`;});svg.innerHTML=h;}
+function copyCard(){const di=S.scores.indexOf(Math.max(...S.scores));const dom=REALMS[di];const profile=document.getElementById('aiptxt').textContent;const txt=`FEED YOUR SHADOW — Shadow Profile\n\nArchetype: ${dom.arch}\n${dom.name} is my dominant shadow\n${S.pts} shadow points\n\n${REALMS.map(r=>r.seal+' '+r.name).join('\n')}\n\nAI Profile:\n${profile}`;navigator.clipboard.writeText(txt).then(()=>{const b=document.querySelector('.cpbtn');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy Shadow Card',2200);});}
+function restartGame(){show('intro');}
+mkP();
+</script>
+</body>
+</html>
