@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mood Lab · PsychoNutri</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{background:#060d1a;color:#e0f0ff;font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}.back{position:fixed;top:1.2rem;left:1.5rem;z-index:100;color:rgba(56,189,248,0.4);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.3s;font-family:'Syne',sans-serif}.back:hover{color:#38bdf8}.grid-bg{position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(56,189,248,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(56,189,248,0.03) 1px,transparent 1px);background-size:40px 40px}.scr{position:relative;z-index:1;max-width:700px;margin:0 auto;padding:5rem 2rem 4rem}.lab-header{text-align:center;margin-bottom:3rem}.lab-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);color:#38bdf8;padding:0.4rem 1rem;border-radius:50px;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem}.lab-badge span{width:6px;height:6px;background:#38bdf8;border-radius:50%;animation:blink 1.5s ease infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}.lab-title{font-family:'Syne',sans-serif;font-size:2.8rem;font-weight:700;margin-bottom:0.8rem;background:linear-gradient(135deg,#38bdf8,#818cf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}.lab-sub{color:rgba(224,240,255,0.55);font-size:1rem;line-height:1.75;max-width:480px;margin:0 auto}.lab-form{background:rgba(56,189,248,0.03);border:1px solid rgba(56,189,248,0.12);border-radius:16px;padding:2rem;margin-bottom:2rem}.form-group{margin-bottom:1.8rem}.form-label{font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:#38bdf8;font-weight:500;margin-bottom:0.8rem;display:block}.form-sub{font-size:0.82rem;color:rgba(224,240,255,0.4);margin-bottom:1rem}.slider-wrap{display:flex;align-items:center;gap:1rem}.slider{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;background:rgba(56,189,248,0.15);outline:none;cursor:pointer}.slider::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#38bdf8;cursor:pointer}.slider-val{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:600;color:#38bdf8;min-width:28px;text-align:right}.mood-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.6rem}.mood-btn{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:rgba(224,240,255,0.6);padding:0.7rem 0.4rem;border-radius:10px;cursor:pointer;font-size:0.78rem;text-align:center;transition:all 0.25s;font-family:'Inter',sans-serif}.mood-btn:hover{background:rgba(56,189,248,0.08);border-color:rgba(56,189,248,0.3);color:#e0f0ff}.mood-btn.active{background:rgba(56,189,248,0.15);border-color:rgba(56,189,248,0.5);color:#38bdf8}.mood-icon{font-size:1.4rem;display:block;margin-bottom:0.3rem}.food-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#e0f0ff;padding:0.9rem 1.1rem;border-radius:10px;font-family:'Inter',sans-serif;font-size:0.95rem;outline:none;transition:border-color 0.3s;resize:vertical;min-height:80px}.food-input:focus{border-color:rgba(56,189,248,0.4)}.food-input::placeholder{color:rgba(224,240,255,0.25)}.analyze-btn{width:100%;background:linear-gradient(135deg,#0ea5e9,#6366f1);color:white;border:none;padding:1rem;border-radius:12px;font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:600;cursor:pointer;letter-spacing:0.05em;transition:all 0.3s;margin-top:1rem}.analyze-btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(14,165,233,0.3)}.analyze-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}#results{display:none}.brain-section{background:rgba(56,189,248,0.03);border:1px solid rgba(56,189,248,0.12);border-radius:16px;padding:2rem;margin-bottom:1.5rem}.brain-title{font-family:'Syne',sans-serif;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:#38bdf8;margin-bottom:1.5rem}.chemical-row{margin-bottom:1.2rem}.chem-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}.chem-name{font-size:0.9rem;font-weight:500;color:#e0f0ff}.chem-val{font-family:'Syne',sans-serif;font-size:0.85rem;color:#38bdf8}.chem-bar{height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}.chem-fill{height:100%;border-radius:3px;transition:width 1.5s ease}.chem-info{font-size:0.78rem;color:rgba(224,240,255,0.4);margin-top:0.4rem;line-height:1.5}.recipe-section{background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.2);border-radius:16px;padding:2rem;margin-bottom:1.5rem}.recipe-title{font-family:'Syne',sans-serif;font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:#818cf8;margin-bottom:1.2rem}.recipe-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem}.recipe-item{background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.15);border-radius:10px;padding:0.9rem}.recipe-food{font-size:0.88rem;font-weight:500;color:#e0f0ff;margin-bottom:0.2rem}.recipe-why{font-size:0.75rem;color:rgba(224,240,255,0.45);line-height:1.5}.ai-section{background:rgba(56,189,248,0.03);border:1px solid rgba(56,189,248,0.15);border-radius:16px;padding:2rem;margin-bottom:1.5rem}.ai-lbl{font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:#38bdf8;margin-bottom:0.8rem;font-family:'Syne',sans-serif}.ai-text{font-size:0.95rem;color:rgba(224,240,255,0.75);line-height:1.85;font-style:italic;min-height:60px}.spin{animation:pulse 1.5s ease infinite;display:inline-block}@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}.reset-btn{background:transparent;border:1px solid rgba(56,189,248,0.25);color:rgba(56,189,248,0.6);padding:0.7rem 2rem;border-radius:50px;cursor:pointer;font-family:'Syne',sans-serif;font-size:0.8rem;transition:all 0.25s;margin-top:1rem}.reset-btn:hover{border-color:#38bdf8;color:#38bdf8}.home-btn{display:inline-block;margin-top:0.8rem;color:rgba(56,189,248,0.35);text-decoration:none;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;transition:color 0.25s}.home-btn:hover{color:#38bdf8}@media(max-width:500px){.mood-grid{grid-template-columns:repeat(2,1fr)}.recipe-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<a href="../index.html" class="back">← All Modules</a>
+<div class="scr">
+  <div class="lab-header">
+    <div class="lab-badge"><span></span> Brain Chemistry Lab</div>
+    <div class="lab-title">The Mood Lab</div>
+    <p class="lab-sub">Input your mood and recent meals. Watch your brain chemistry light up in real time — then receive a personalised mood recipe.</p>
+  </div>
+  <div id="form-area">
+    <div class="lab-form">
+      <div class="form-group">
+        <label class="form-label">How are you feeling right now?</label>
+        <div class="form-sub">Select your current emotional state</div>
+        <div class="mood-grid">
+          <button class="mood-btn" onclick="selectMood(this,'Anxious')"><span class="mood-icon">😰</span>Anxious</button>
+          <button class="mood-btn" onclick="selectMood(this,'Stressed')"><span class="mood-icon">😤</span>Stressed</button>
+          <button class="mood-btn" onclick="selectMood(this,'Sad')"><span class="mood-icon">😔</span>Sad</button>
+          <button class="mood-btn" onclick="selectMood(this,'Happy')"><span class="mood-icon">😊</span>Happy</button>
+          <button class="mood-btn" onclick="selectMood(this,'Tired')"><span class="mood-icon">😴</span>Tired</button>
+          <button class="mood-btn" onclick="selectMood(this,'Focused')"><span class="mood-icon">🎯</span>Focused</button>
+          <button class="mood-btn" onclick="selectMood(this,'Angry')"><span class="mood-icon">😠</span>Angry</button>
+          <button class="mood-btn" onclick="selectMood(this,'Numb')"><span class="mood-icon">😶</span>Numb</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Stress Level</label>
+        <div class="slider-wrap">
+          <span style="font-size:0.8rem;color:rgba(224,240,255,0.4)">Low</span>
+          <input type="range" class="slider" id="stressSlider" min="1" max="10" value="5" oninput="document.getElementById('stressVal').textContent=this.value">
+          <span style="font-size:0.8rem;color:rgba(224,240,255,0.4)">High</span>
+          <span class="slider-val" id="stressVal">5</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Sleep Last Night (hours)</label>
+        <div class="slider-wrap">
+          <span style="font-size:0.8rem;color:rgba(224,240,255,0.4)">2h</span>
+          <input type="range" class="slider" id="sleepSlider" min="2" max="10" value="6" oninput="document.getElementById('sleepVal').textContent=this.value+'h'">
+          <span style="font-size:0.8rem;color:rgba(224,240,255,0.4)">10h</span>
+          <span class="slider-val" id="sleepVal">6h</span>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label class="form-label">What did you eat today?</label>
+        <div class="form-sub">Be as specific or vague as you like</div>
+        <textarea class="food-input" id="foodInput" placeholder="e.g. skipped breakfast, had a coffee, chips at lunch, pizza for dinner..."></textarea>
+      </div>
+      <button class="analyze-btn" onclick="analyze()" id="analyzeBtn">Analyse My Brain Chemistry →</button>
+    </div>
+  </div>
+  <div id="results">
+    <div class="brain-section">
+      <div class="brain-title">🧠 Your Current Brain Chemistry</div>
+      <div class="chemical-row"><div class="chem-header"><span class="chem-name">Serotonin (Mood Stabiliser)</span><span class="chem-val" id="seroVal">—</span></div><div class="chem-bar"><div class="chem-fill" id="seroBar" style="width:0%;background:linear-gradient(90deg,#818cf8,#a78bfa)"></div></div><div class="chem-info" id="seroInfo"></div></div>
+      <div class="chemical-row"><div class="chem-header"><span class="chem-name">Dopamine (Motivation & Reward)</span><span class="chem-val" id="dopaVal">—</span></div><div class="chem-bar"><div class="chem-fill" id="dopaBar" style="width:0%;background:linear-gradient(90deg,#f59e0b,#f97316)"></div></div><div class="chem-info" id="dopaInfo"></div></div>
+      <div class="chemical-row"><div class="chem-header"><span class="chem-name">Cortisol (Stress Hormone)</span><span class="chem-val" id="cortVal">—</span></div><div class="chem-bar"><div class="chem-fill" id="cortBar" style="width:0%;background:linear-gradient(90deg,#ef4444,#dc2626)"></div></div><div class="chem-info" id="cortInfo"></div></div>
+      <div class="chemical-row"><div class="chem-header"><span class="chem-name">GABA (Calm & Relaxation)</span><span class="chem-val" id="gabaVal">—</span></div><div class="chem-bar"><div class="chem-fill" id="gabaBar" style="width:0%;background:linear-gradient(90deg,#10b981,#34d399)"></div></div><div class="chem-info" id="gabaInfo"></div></div>
+    </div>
+    <div class="recipe-section"><div class="recipe-title">🍽️ Your Mood Recipe — Eat This Now</div><div class="recipe-grid" id="recipeGrid"></div></div>
+    <div class="ai-section"><div class="ai-lbl">AI Brain Analysis</div><div class="ai-text" id="aiText"><span class="spin">Analysing your brain chemistry...</span></div></div>
+    <div style="text-align:center"><button class="reset-btn" onclick="resetLab()">Run Another Analysis</button><br><a href="../index.html" class="home-btn">← Back to All Modules</a></div>
+  </div>
+</div>
+<script src="../js/fallback.js"></script>
+<script>
+let selectedMood='';
+function selectMood(btn,mood){document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');selectedMood=mood;}
+function calcChemistry(mood,stress,sleep,food){const f=food.toLowerCase();let sero=50,dopa=50,cort=50,gaba=50;cort+=stress*4;sero-=stress*2;gaba-=stress*3;if(sleep<6){sero-=(6-sleep)*6;dopa-=(6-sleep)*4;gaba-=(6-sleep)*5;}else if(sleep>=8){sero+=10;gaba+=8;}const moodFx={Anxious:{cort:15,gaba:-15},Stressed:{cort:20,sero:-10},Sad:{sero:-20,dopa:-15},Happy:{sero:15,dopa:10},Tired:{dopa:-15,gaba:-10},Focused:{dopa:10,sero:5},Angry:{cort:20,gaba:-20},Numb:{sero:-15,dopa:-20,gaba:-10}};if(moodFx[mood]){const fx=moodFx[mood];sero+=(fx.sero||0);dopa+=(fx.dopa||0);cort+=(fx.cort||0);gaba+=(fx.gaba||0);}if(f.includes('coffee')||f.includes('caffeine')){dopa+=10;cort+=15;gaba-=10;}if(f.includes('sugar')||f.includes('cake')||f.includes('cookie')){dopa+=15;sero+=5;}if(f.includes('fish')||f.includes('salmon')){sero+=15;dopa+=8;}if(f.includes('egg')){sero+=8;dopa+=6;}if(f.includes('banana')){sero+=12;}if(f.includes('skip')||f.includes('nothing')||f.includes('just coffee')){sero-=15;dopa-=10;gaba-=8;}if(f.includes('pizza')||f.includes('chips')||f.includes('junk')){dopa+=8;sero-=5;cort+=5;}if(f.includes('vegetable')||f.includes('salad')||f.includes('greens')){sero+=8;gaba+=5;}return{sero:Math.max(5,Math.min(95,Math.round(sero))),dopa:Math.max(5,Math.min(95,Math.round(dopa))),cort:Math.max(5,Math.min(95,Math.round(cort))),gaba:Math.max(5,Math.min(95,Math.round(gaba)))};}
+function getLevel(val){if(val<30)return'Low';if(val<55)return'Moderate';if(val<75)return'Elevated';return'High';}
+function getMealRecipe(chem){const r=[];if(chem.sero<50)r.push({food:'Walnuts + banana',why:'Tryptophan → serotonin synthesis'},{food:'Turkey or chicken wrap',why:'Rich in serotonin precursors'});if(chem.dopa<50)r.push({food:'Eggs + avocado',why:'Tyrosine boosts dopamine'},{food:'Dark chocolate (70%+)',why:'Phenylethylamine + endorphins'});if(chem.cort>65)r.push({food:'Chamomile or ashwagandha tea',why:'Cortisol regulation at cellular level'},{food:'Magnesium-rich almonds',why:'Down-regulates HPA stress axis'});if(chem.gaba<45)r.push({food:'Fermented yoghurt',why:'Gut-GABA via vagus nerve'},{food:'Green tea (L-theanine)',why:'Direct GABA receptor activation'});if(r.length<2)r.push({food:'Oats with berries',why:'Stable blood sugar = stable mood'},{food:'Leafy greens + lemon',why:'Folate for neurotransmitter balance'});return r.slice(0,4);}
+async function analyze(){if(!selectedMood){alert('Please select your current mood first.');return;}const food=document.getElementById('foodInput').value||'nothing specific';const stress=parseInt(document.getElementById('stressSlider').value);const sleep=parseInt(document.getElementById('sleepSlider').value);document.getElementById('analyzeBtn').disabled=true;document.getElementById('form-area').style.display='none';document.getElementById('results').style.display='block';const chem=calcChemistry(selectedMood,stress,sleep,food);setTimeout(()=>{document.getElementById('seroVal').textContent=getLevel(chem.sero);document.getElementById('seroBar').style.width=chem.sero+'%';document.getElementById('seroInfo').textContent=chem.sero<50?'Low serotonin is linked to low mood, poor sleep, and increased carb cravings.':'Serotonin levels are supporting your mood regulation and emotional resilience.';document.getElementById('dopaVal').textContent=getLevel(chem.dopa);document.getElementById('dopaBar').style.width=chem.dopa+'%';document.getElementById('dopaInfo').textContent=chem.dopa<50?'Low dopamine reduces motivation and increases reward-seeking behaviour — often expressed as cravings.':'Dopamine is fuelling your drive and motivation effectively.';document.getElementById('cortVal').textContent=getLevel(chem.cort);document.getElementById('cortBar').style.width=chem.cort+'%';document.getElementById('cortInfo').textContent=chem.cort>65?'Elevated cortisol suppresses digestion and drives stress eating patterns.':'Cortisol is within a manageable range.';document.getElementById('gabaVal').textContent=getLevel(chem.gaba);document.getElementById('gabaBar').style.width=chem.gaba+'%';document.getElementById('gabaInfo').textContent=chem.gaba<45?'Low GABA creates restlessness — often leading to emotional eating at night.':'GABA is providing adequate calm and helping regulate anxiety responses.';const recipes=getMealRecipe(chem);const rg=document.getElementById('recipeGrid');rg.innerHTML='';recipes.forEach(r=>{const d=document.createElement('div');d.className='recipe-item';d.innerHTML=`<div class="recipe-food">🍽️ ${r.food}</div><div class="recipe-why">${r.why}</div>`;rg.appendChild(d);});},400);
+// ── SMART AI with automatic fallback ──
+const prompt=`You are a nutritional neuroscientist. A student reports: mood: ${selectedMood}, stress: ${stress}/10, sleep: ${sleep}h, ate: "${food}". Brain chemistry: serotonin ${chem?.sero||50}% (${getLevel(chem?.sero||50)}), dopamine ${chem?.dopa||50}% (${getLevel(chem?.dopa||50)}), cortisol ${chem?.cort||50}% (${getLevel(chem?.cort||50)}), GABA ${chem?.gaba||50}% (${getLevel(chem?.gaba||50)}). Write 3-4 sentence personalised brain chemistry analysis. Scientific but accessible. Under 100 words.`;
+const chem2=calcChemistry(selectedMood,stress,sleep,food);
+smartAI(prompt,()=>FALLBACK.moodLab(selectedMood,stress,sleep,food,chem2)).then(text=>{document.getElementById('aiText').textContent=text;});}
+function resetLab(){selectedMood='';document.getElementById('form-area').style.display='block';document.getElementById('results').style.display='none';document.getElementById('analyzeBtn').disabled=false;document.getElementById('foodInput').value='';document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));document.getElementById('stressSlider').value=5;document.getElementById('stressVal').textContent='5';document.getElementById('sleepSlider').value=6;document.getElementById('sleepVal').textContent='6h';}
+</script>
+</body>
+</html>
